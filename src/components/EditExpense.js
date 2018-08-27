@@ -4,9 +4,10 @@ class EditExpense extends React.Component {
 
     //JSX
     render(){
+        console.log(this.props);
         return (
             <div>
-                <p>EditExpense Working</p>
+                <p>EditExpense Working with id: {this.props.match.params.id}</p>
             </div>
         );
     }
