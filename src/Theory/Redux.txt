@@ -1,0 +1,13 @@
+- Redux is also used to manage state of application similar to normal 'component react state'.
+- With states in case of complex scenarios its very diificult to manage, redux makes it easy
+- 'component react state' states are good when we have simple structure i.e single tree where we can pass data in form of 
+props to the children.
+- But in case of complex projects we have multiple trees and using normal states becomes very difficult
+so we use redux.
+
+- 1st Advantage: In simpler terms redux helps in managing complex states in applications.
+- 2nd advantage: of redux is it helps in making reusable components i.e loosely coupled components.
+
+Redux is a state container.
+We use redux store for managing states where in we can add data to state or read data from the state.
+Redux stores data in form of object only.
