@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    app: './src/playground/arrayDestructuring.js'
+    app: './src/playground/redux101.js'
   },
   output: {
     filename: 'bundle.js',
