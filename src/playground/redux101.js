@@ -1,6 +1,12 @@
 import {createStore} from 'redux';
 
-const store = createStore((state = {count:0}, action)=>{
+
+//Reducers
+// Reducers are pure functions meaning o/p depends only on the i/ps i.e params
+// pure functions don't depend on any variable outside function
+// never change state or action directly
+
+const countReducer = (state = {count:0}, action)=>{
 
     switch(action.type){
         case 'INCREMENT':
@@ -20,7 +26,8 @@ const store = createStore((state = {count:0}, action)=>{
         default: 
             return state
     }
-});
+};
+const store = createStore(countReducer);
 
 // Action generators
 const incrementCount = ({incrementBy = 1}={})=>{
