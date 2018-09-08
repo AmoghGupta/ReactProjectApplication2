@@ -48,6 +48,26 @@ const filtersReducer = (state = filtersReducerDefaultState,action)=>{
             ...state,
             text:action.filterValue
         } ;
+        case 'SORT_BY_DATE':
+        return{
+            ...state,
+            sortBy:action.sortByValue
+        }
+        case 'SORT_BY_AMOUNT':
+        return{
+            ...state,
+            sortBy:action.sortByValue
+        }
+        case 'SET_START_DATE':
+        return{
+            ...state,
+            startDate:action.setStartDate
+        }
+        case 'SET_END_DATE':
+        return{
+            ...state,
+            endDate:action.setEndDate
+        }
         default:
         return state;
     }
@@ -143,8 +163,46 @@ const setTextFilter = (filterValue='')=>{
 store.dispatch(setTextFilter('rent12'));
 store.dispatch(setTextFilter(''));
 
+
+const sortByDate = (sortByValue='')=>{
+    return{
+        type: 'SORT_BY_DATE',
+        sortByValue: sortByValue
+    }
+}
 //SORT_BY_DATE
-//SORT_BY_AMOUNT_
+store.dispatch(sortByDate('date'));
+
+const sortByAmount= (sortByValue='')=>{
+    return{
+        type: 'SORT_BY_AMOUNT',
+        sortByValue: sortByValue
+    }
+}
+//SORT_BY_AMOUNT
+store.dispatch(sortByAmount('amount'));
+
+
+const setStartDate= (setStartDate)=>{
+    return{
+        type: 'SET_START_DATE',
+        setStartDate: setStartDate
+    }
+}
+
 //SET_START_DATE
+store.dispatch(setStartDate(125));
+
+store.dispatch(setStartDate());
+
+
+const setEndDate= (setEndDate)=>{
+    return{
+        type: 'SET_END_DATE',
+        setEndDate: setEndDate
+    }
+}
+
 //SET_END_DATE
+store.dispatch(setEndDate(1250));
 
