@@ -1,6 +1,14 @@
 import {createStore, combineReducers} from  'redux';
 import uuid from 'uuid';
 
+// Concept
+//Store for storing state of components
+//Store has Reducers
+//Reducer has action and state, based on action, state is modified
+//Action dispatcher dispatches an action, based on which the reducer in the store is executed 
+// and the state is modified  
+
+
 // default states
 const expenseReducerDefaultState = [];
 const filtersReducerDefaultState = {
@@ -16,9 +24,18 @@ const expensesReducer = (state = expenseReducerDefaultState,action)=>{
         case 'ADD_EXPENSE':
         return [...state,action.expense]
         case 'REMOVE_EXPENSE':
-            var newArray = state.slice();
-            var index = state.indexOf(action.id)
-        return newArray.splice(index, 1);
+           return state.filter(({id})=> id!== action.id)
+        case 'EDIT_EXPENSE':
+        return state.map((expense)=>{
+            if(expense.id == action.expense.id){
+                return {
+                    ...expense,
+                    ...action.expense
+                }
+            }else{
+                return expense
+            }
+        })
         default:
         return state;
     }
@@ -26,6 +43,11 @@ const expensesReducer = (state = expenseReducerDefaultState,action)=>{
 // FILTER REDUCER
 const filtersReducer = (state = filtersReducerDefaultState,action)=>{
     switch(action.type){
+        case 'SET_TEXT_FILTER':
+        return {
+            ...state,
+            text:action.filterValue
+        } ;
         default:
         return state;
     }
@@ -80,12 +102,10 @@ const expenseTwo =store.dispatch(addExpense({
 
 
 //ADD_EXPENSE
-const removeExpense = ({id=''}={})=>{
+const removeExpense = ({id}={})=>{
     return {
         type: 'REMOVE_EXPENSE',
-        id: {
-            id
-        }
+        id
     }
 }
 
@@ -95,8 +115,34 @@ store.dispatch(removeExpense({
 }));
 
 
+//EDIT EXPENSE
+const editExpense = (expense)=>{
+    return{
+        type: 'EDIT_EXPENSE',
+        expense: {
+            ...expense,
+            note: 'this was the second edited/updated expense',
+            amount: 500,
+        }
+    }
+}
+
 //EDIT_EXPENSE
+store.dispatch(editExpense(expenseTwo.expense));
+
+
+const setTextFilter = (filterValue='')=>{
+    return{
+        type: 'SET_TEXT_FILTER',
+        filterValue: filterValue
+    }
+}
+
+
 //SET_TEXT_FILTER
+store.dispatch(setTextFilter('rent12'));
+store.dispatch(setTextFilter(''));
+
 //SORT_BY_DATE
 //SORT_BY_AMOUNT_
 //SET_START_DATE
